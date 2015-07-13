@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B508A4C1B54028B00EB70EA /* locationTriviaViewsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B508A4B1B54028B00EB70EA /* locationTriviaViewsSpec.m */; };
+		5B508A4E1B5407C800EB70EA /* FISAPIClientSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B508A4D1B5407C800EB70EA /* FISAPIClientSpec.m */; };
 		D80594AD1976F1B300116B35 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80594AC1976F1B300116B35 /* Foundation.framework */; };
 		D80594AF1976F1B300116B35 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80594AE1976F1B300116B35 /* CoreGraphics.framework */; };
 		D80594B11976F1B300116B35 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80594B01976F1B300116B35 /* UIKit.framework */; };
@@ -17,7 +19,6 @@
 		D80594CD1976F1B300116B35 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80594AC1976F1B300116B35 /* Foundation.framework */; };
 		D80594CE1976F1B300116B35 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80594B01976F1B300116B35 /* UIKit.framework */; };
 		D80594D61976F1B300116B35 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D80594D41976F1B300116B35 /* InfoPlist.strings */; };
-		D80594D81976F1B300116B35 /* locationTrivia_APITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D80594D71976F1B300116B35 /* locationTrivia_APITests.m */; };
 		D80594F21976F1D000116B35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D80594E11976F1D000116B35 /* Main.storyboard */; };
 		D80594F31976F1D000116B35 /* FISAddTriviaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80594E31976F1D000116B35 /* FISAddTriviaViewController.m */; };
 		D80594F41976F1D000116B35 /* FISAddLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80594E51976F1D000116B35 /* FISAddLocationViewController.m */; };
@@ -42,6 +43,8 @@
 
 /* Begin PBXFileReference section */
 		1F44F6EB447FDAE794EDEC8B /* libPods-locationTrivia-APITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-locationTrivia-APITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B508A4B1B54028B00EB70EA /* locationTriviaViewsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = locationTriviaViewsSpec.m; sourceTree = "<group>"; };
+		5B508A4D1B5407C800EB70EA /* FISAPIClientSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FISAPIClientSpec.m; sourceTree = "<group>"; };
 		9EA63685DE4E8E9ACEAD2B8E /* Pods-locationTrivia-APITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locationTrivia-APITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-locationTrivia-APITests/Pods-locationTrivia-APITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B7080BB79891B7BA6DC9A172 /* Pods-locationTrivia-APITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locationTrivia-APITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-locationTrivia-APITests/Pods-locationTrivia-APITests.release.xcconfig"; sourceTree = "<group>"; };
 		D80594A91976F1B300116B35 /* locationTrivia-API.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "locationTrivia-API.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,7 +60,6 @@
 		D80594CB1976F1B300116B35 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		D80594D31976F1B300116B35 /* locationTrivia-APITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "locationTrivia-APITests-Info.plist"; sourceTree = "<group>"; };
 		D80594D51976F1B300116B35 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D80594D71976F1B300116B35 /* locationTrivia_APITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = locationTrivia_APITests.m; sourceTree = "<group>"; };
 		D80594E11976F1D000116B35 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D80594E21976F1D000116B35 /* FISAddTriviaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FISAddTriviaViewController.h; sourceTree = "<group>"; };
 		D80594E31976F1D000116B35 /* FISAddTriviaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FISAddTriviaViewController.m; sourceTree = "<group>"; };
@@ -183,7 +185,8 @@
 		D80594D11976F1B300116B35 /* locationTrivia-APITests */ = {
 			isa = PBXGroup;
 			children = (
-				D80594D71976F1B300116B35 /* locationTrivia_APITests.m */,
+				5B508A4B1B54028B00EB70EA /* locationTriviaViewsSpec.m */,
+				5B508A4D1B5407C800EB70EA /* FISAPIClientSpec.m */,
 				D80594D21976F1B300116B35 /* Supporting Files */,
 			);
 			path = "locationTrivia-APITests";
@@ -347,7 +350,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D80594D81976F1B300116B35 /* locationTrivia_APITests.m in Sources */,
+				5B508A4C1B54028B00EB70EA /* locationTriviaViewsSpec.m in Sources */,
+				5B508A4E1B5407C800EB70EA /* FISAPIClientSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
