@@ -9,9 +9,13 @@
 #import "FISAPIClient.h"
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 
-#define API_KEY @"8efafff01e66130686fb5a76ac9f99abfb55103a"
+#warning change this to equal your key!
+#define API_KEY @"YOUR API KEY"
 #define BASE_URL @"http://locationtrivia.herokuapp.com/"
 
 @implementation FISAPIClient
+
+
+
 
 @end
