@@ -1,22 +1,21 @@
 PODS:
   - Expecta (0.2.4)
-  - KIF (3.0.8):
-    - KIF/XCTest (= 3.0.8)
-  - KIF/XCTest (3.0.8)
+  - KIF (3.2.3):
+    - KIF/XCTest (= 3.2.3)
+  - KIF/XCTest (3.2.3)
   - OCHamcrest (4.1.1)
   - OCMock (2.2.4)
   - OCMockito (1.4.0):
     - OCHamcrest (~> 4.0)
-  - OHHTTPStubs (3.1.11):
-    - OHHTTPStubs/Core (= 3.1.11)
-  - OHHTTPStubs/Core (3.1.11)
+  - OHHTTPStubs (3.1.12):
+    - OHHTTPStubs/Core (= 3.1.12)
+  - OHHTTPStubs/Core (3.1.12)
   - Specta (0.2.99)
   - Swizzlean (0.1.2)
 
 DEPENDENCIES:
   - Expecta (~> 0.2.4)
   - KIF (~> 3.0)
-  - KIF (~> 3.0.4)
   - OCMock (~> 2.2.4)
   - OCMockito
   - OHHTTPStubs (~> 3.1.2)
@@ -35,12 +34,12 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Expecta: cfaf1d3e2e194ca704a25e997093d30a1ce70b61
-  KIF: 3c2cb8e66fb216f9c3abcd714699411f0256f767
+  KIF: a94bffe9c97e449e44f8fa481c53243d21309e1e
   OCHamcrest: 6f03ffa81d12feab872638490a44ab0a6d3aca10
   OCMock: a6a7dc0e3997fb9f35d99f72528698ebf60d64f2
   OCMockito: 4981140c9a9ec06c31af40f636e3c0f25f27e6b2
-  OHHTTPStubs: 5624a5d20d97d46d47e15a68ca8808b59ccf0512
+  OHHTTPStubs: 8cf0cfe6f34f13fc88fdf5b2a1b2c2536e8c0261
   Specta: 364e12c765a21e5a11a319109c84a25bbb15e4dd
   Swizzlean: 164ef9d428a35ef61a404747ab40010f303dffa2
 
-COCOAPODS: 0.36.0
+COCOAPODS: 0.37.2
