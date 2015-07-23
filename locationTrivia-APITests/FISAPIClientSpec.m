@@ -29,27 +29,40 @@ describe(@"FISAPIClient", ^{
         
         [OHHTTPStubs removeAllStubs];
         
-        httpStub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request)
-                    {
-                        return [request.URL.host isEqualToString:@"locationtrivia.herokuapp.com"];
-                    }
-                                       withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request)
-                    {
-                        fakeSON = @[@{@"name": @"coolTown",
-                                      @"latitude": @"100",
-                                      @"longitude": @"50"}];
-                        
-                        return [OHHTTPStubsResponse responseWithJSONObject:fakeSON
-                                                                statusCode:200
-                                                                   headers:@{ @"Content-type": @"application/json"}];
-                    }];
+        httpStub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+            
+            return [request.URL.host isEqualToString:@"locationtrivia.herokuapp.com"];
+        }
+                                       withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
+                                           
+                                           fakeSON = @[@{@"name": @"coolTown",
+                                                         @"latitude": @"100",
+                                                         @"longitude": @"50"}];
+                                           
+                                           return [OHHTTPStubsResponse responseWithJSONObject:fakeSON
+                                                                                   statusCode:200
+                                                                                      headers:@{ @"Content-type": @"application/json"}];
+                                       }];
     });
+    
     
     describe(@"requestLocationsWithSuccess:failure:", ^{
         it(@"should make a GET request with AFHTTPRequestOperationManager object, should get back responseObject containing FISLocations", ^{
             
             waitUntil(^(DoneCallback done) {
+                
                 [[FISAPIClient sharedClient] requestLocationsWithSuccess:^(NSArray *locations) {
+                    
+                    
+                    //check on locations.
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     
                     FISLocation *location = [FISLocation locationFromDictionary:locations[0]];
                     
@@ -60,7 +73,10 @@ describe(@"FISAPIClient", ^{
                     expect(location.longitude).to.equal(@50);
                     
                     done();
+                    
                 } failure:^(NSError *error) {
+                    
+                    failure(@"This should not happen");
                     
                     done();
                 }];
