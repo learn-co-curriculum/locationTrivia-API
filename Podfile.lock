@@ -1,69 +1,60 @@
 PODS:
-  - AFNetworking (2.5.2):
-    - AFNetworking/NSURLConnection (= 2.5.2)
-    - AFNetworking/NSURLSession (= 2.5.2)
-    - AFNetworking/Reachability (= 2.5.2)
-    - AFNetworking/Security (= 2.5.2)
-    - AFNetworking/Serialization (= 2.5.2)
-    - AFNetworking/UIKit (= 2.5.2)
-  - AFNetworking/NSURLConnection (2.5.2):
+  - AFNetworking (2.5.4):
+    - AFNetworking/NSURLConnection (= 2.5.4)
+    - AFNetworking/NSURLSession (= 2.5.4)
+    - AFNetworking/Reachability (= 2.5.4)
+    - AFNetworking/Security (= 2.5.4)
+    - AFNetworking/Serialization (= 2.5.4)
+    - AFNetworking/UIKit (= 2.5.4)
+  - AFNetworking/NSURLConnection (2.5.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.5.2):
+  - AFNetworking/NSURLSession (2.5.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.5.2)
-  - AFNetworking/Security (2.5.2)
-  - AFNetworking/Serialization (2.5.2)
-  - AFNetworking/UIKit (2.5.2):
+  - AFNetworking/Reachability (2.5.4)
+  - AFNetworking/Security (2.5.4)
+  - AFNetworking/Serialization (2.5.4)
+  - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Expecta (0.2.4)
-  - KIF (3.0.8):
-    - KIF/XCTest (= 3.0.8)
-  - KIF/XCTest (3.0.8)
+  - Expecta (1.0.0)
+  - Forecastr (0.2.2):
+    - AFNetworking (~> 2.5.4)
+  - KIF (3.2.3):
+    - KIF/XCTest (= 3.2.3)
+  - KIF/XCTest (3.2.3)
   - OCHamcrest (4.1.1)
-  - OCMock (2.2.4)
+  - OCMock (3.1.2)
   - OCMockito (1.4.0):
     - OCHamcrest (~> 4.0)
-  - OHHTTPStubs (3.1.11):
-    - OHHTTPStubs/Core (= 3.1.11)
-  - OHHTTPStubs/Core (3.1.11)
-  - Specta (0.2.99)
-  - Swizzlean (0.1.2)
+  - OHHTTPStubs (4.0.2)
+  - Specta (1.0.2)
+  - Swizzlean (0.2.0)
 
 DEPENDENCIES:
   - AFNetworking
-  - Expecta (~> 0.2.4)
-  - KIF (~> 3.0)
-  - KIF (~> 3.0.4)
-  - OCMock (~> 2.2.4)
+  - Expecta
+  - Forecastr
+  - KIF
+  - OCMock
   - OCMockito
-  - OHHTTPStubs (~> 3.1.2)
-  - Specta (from `git@github.com:specta/specta.git`, commit `93e4eac3fc31e0539261ae2fb633cae7e6b93b33`)
-  - Swizzlean (~> 0.1.1)
-
-EXTERNAL SOURCES:
-  Specta:
-    :commit: 93e4eac3fc31e0539261ae2fb633cae7e6b93b33
-    :git: git@github.com:specta/specta.git
-
-CHECKOUT OPTIONS:
-  Specta:
-    :commit: 93e4eac3fc31e0539261ae2fb633cae7e6b93b33
-    :git: git@github.com:specta/specta.git
+  - OHHTTPStubs
+  - Specta
+  - Swizzlean
 
 SPEC CHECKSUMS:
-  AFNetworking: fefbce9660acb17f48ae0011292d4da0f457bf36
-  Expecta: cfaf1d3e2e194ca704a25e997093d30a1ce70b61
-  KIF: 3c2cb8e66fb216f9c3abcd714699411f0256f767
+  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  Expecta: 32604574add2c46a36f8d2f716b6c5736eb75024
+  Forecastr: 590a5ae3ecfa417e8292192eb436de4d03126984
+  KIF: a94bffe9c97e449e44f8fa481c53243d21309e1e
   OCHamcrest: 6f03ffa81d12feab872638490a44ab0a6d3aca10
-  OCMock: a6a7dc0e3997fb9f35d99f72528698ebf60d64f2
+  OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
   OCMockito: 4981140c9a9ec06c31af40f636e3c0f25f27e6b2
-  OHHTTPStubs: 5624a5d20d97d46d47e15a68ca8808b59ccf0512
-  Specta: 364e12c765a21e5a11a319109c84a25bbb15e4dd
-  Swizzlean: 164ef9d428a35ef61a404747ab40010f303dffa2
+  OHHTTPStubs: dbd1957d414659783e07b49c961940b7564c23d9
+  Specta: 9cec98310dca411f7c7ffd6943552b501622abfe
+  Swizzlean: 6ef3e5a33063b7cd99dc39f8c55164dc55d9a021
 
-COCOAPODS: 0.36.0
+COCOAPODS: 0.38.0
