@@ -9,7 +9,7 @@
 #import "FISAPIClient.h"
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 
-#define API_KEY @"INPUT_KEY_HERE"
+#define API_KEY @"4884f098b2eb01ac21ff346a9c480600a00b6df4"
 #define BASE_URL @"http://locationtrivia.herokuapp.com/"
 
 @interface FISAPIClient()
@@ -51,7 +51,11 @@
     }];
 }
 
-- (void)createLocationWithName:(NSString *)name Latitude:(NSNumber *)latitude longitude:(NSNumber *)longitude withSuccess:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure
+- (void)createLocationWithName:(NSString *)name
+                      Latitude:(NSNumber *)latitude
+                     longitude:(NSNumber *)longitude
+                   withSuccess:(void (^)(NSDictionary *))success
+                       failure:(void (^)(NSError *))failure
 {
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     parameters[@"key"] = API_KEY;
@@ -60,7 +64,9 @@
     parameters[@"location[longitude]"] = [longitude stringValue];
     
     [self.requestOperationManager POST:@"/locations.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
         NSLog(@"%@", responseObject);
+        
         success(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
