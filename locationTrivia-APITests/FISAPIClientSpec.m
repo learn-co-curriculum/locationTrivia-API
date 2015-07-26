@@ -224,7 +224,7 @@ describe(@"FISAPIClient", ^{
         it(@"Should make a POST request with the correct parameters in creating trivia content for a location ID", ^{
             
             waitUntil(^(DoneCallback done) {
-                                
+                
                 [[FISAPIClient sharedClient]
                  createTriviumWithContent:triviaContent
                  forLocationWithID:idOfLocation
@@ -236,9 +236,9 @@ describe(@"FISAPIClient", ^{
                      expect(trivium).to.beAKindOf([NSDictionary class]);
                      expect(trivium[@"id"]).to.equal(@"999");
                      expect(trivium[@"content"]).to.equal(@"Great restaurants");
-            
+                     
                      expect(locationFromID[@"id"]).to.equal(@"939");
-                
+                     
                      //Testing that the triviumFromDictionary: method is properly implemented.  Number of likes isn't stored in the API, it should be instantiated with 0 likes of type NSInteger.
                      expect(trivia).to.beKindOf([FISTrivia class]);
                      expect(trivia.triviaID).to.equal(@"999");
@@ -247,7 +247,48 @@ describe(@"FISAPIClient", ^{
                      expect(trivia.likes).to.equal(0);
                      
                      done();
-                    
+                     
+                 } failure:^(NSError *error) {
+                     
+                     failure(@"This should not happen");
+                     done();
+                     
+                 }];
+            });
+        });
+    });
+    
+    describe(@"deleteTriviumWithID:withLocationID:withSuccess:failure:", ^{
+        
+        beforeEach(^{
+            
+            [OHHTTPStubs removeAllStubs];
+            httpStub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+                return [request.URL.host isEqualToString:@"locationtrivia.herokuapp.com"];
+            }
+                                           withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
+                                               
+                                               trivaCreated = @{ };
+                                               return [OHHTTPStubsResponse responseWithJSONObject:trivaCreated
+                                                                                       statusCode:200
+                                                                                          headers:@{ @"Content-type": @"application/json"}];
+                                           }];
+        });
+        
+        it(@"Make a DELETE request, expecting to reach the success block where the responseObject should be (null) and return YES in the success block", ^{
+            
+            waitUntil(^(DoneCallback done) {
+                
+                [[FISAPIClient sharedClient]
+                 deleteTriviumWithID:@"999"
+                 withLocationID:@"939"
+                 withSuccess:^(BOOL success) {
+                     
+                     //This test will still pass if the user makes any form of request (GET, POST, etc.).  This goes under the assumption that a DELETE request is made using the triviumID and location ID
+                     
+                     expect(success).to.equal(YES);
+                     done();
+                     
                  } failure:^(NSError *error) {
                      
                      failure(@"This should not happen");
@@ -259,7 +300,4 @@ describe(@"FISAPIClient", ^{
     });
 });
 
-
-
 SpecEnd
-
