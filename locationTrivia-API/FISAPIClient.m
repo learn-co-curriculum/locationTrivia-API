@@ -39,7 +39,8 @@
     return self;
 }
 
-- (void)requestLocationsWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure
+- (void)requestLocationsWithSuccess:(void (^)(NSArray *))success
+                            failure:(void (^)(NSError *))failure
 {
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     parameters[@"key"] = API_KEY;
@@ -73,18 +74,27 @@
     }];
 }
 
-- (void)deleteLocationWithID:(NSString *)locationID withSuccess:(void (^)(BOOL))success failure:(void (^)(NSError *))failure
+- (void)deleteLocationWithID:(NSString *)locationID
+                 withSuccess:(void (^)(BOOL))success
+                     failure:(void (^)(NSError *))failure
 {
     NSString *deleteString = [NSString stringWithFormat:@"/locations/%@.json", locationID];
     
     [self.requestOperationManager DELETE:deleteString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"From the delete request in the API Client: %@", responseObject);
+        
         success(YES);
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(error);
     }];
 }
 
-- (void)createTriviumWithContent:(NSString *)content forLocationWithID:(NSString *)locationID success:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure
+- (void)createTriviumWithContent:(NSString *)content
+               forLocationWithID:(NSString *)locationID
+                         success:(void (^)(NSDictionary *))success
+                         failure:(void (^)(NSError *))failure
 {
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     parameters[@"key"] = API_KEY;
@@ -93,13 +103,19 @@
     NSString *triviumString = [NSString stringWithFormat:@"/locations/%@/trivia.json", locationID];
     
     [self.requestOperationManager POST:triviumString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"What is the response object in createTrivium: %@", responseObject);
+        
         success(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(error);
     }];
 }
 
-- (void)deleteTriviumWithID:(NSString *)triviumID withLocationID:(NSString *)locationID withSuccess:(void (^)(BOOL))success failure:(void (^)(NSError *))failure
+- (void)deleteTriviumWithID:(NSString *)triviumID
+             withLocationID:(NSString *)locationID
+                withSuccess:(void (^)(BOOL))success
+                    failure:(void (^)(NSError *))failure
 {
     NSString *deleteString = [NSString stringWithFormat:@"/locations/%@/trivia/%@.json", locationID, triviumID];
     
