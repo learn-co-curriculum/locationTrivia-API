@@ -1,7 +1,4 @@
----
-tags: api, networking, advanced, blocks
-languages: objc
----
+
 
 # Location Trivia APIs
 
