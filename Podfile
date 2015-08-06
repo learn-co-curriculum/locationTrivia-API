@@ -19,5 +19,6 @@ target "locationTrivia-APITests" do
   pod 'OCMockito'
   pod 'OCMock'
   pod 'OHHTTPStubs'
+  pod 'Asterism'
 
 end

@@ -20,7 +20,8 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Expecta (1.0.0)
+  - Asterism (1.0.0)
+  - Expecta (1.0.2)
   - Forecastr (0.2.2):
     - AFNetworking (~> 2.5.4)
   - KIF (3.2.3):
@@ -30,12 +31,13 @@ PODS:
   - OCMock (3.1.2)
   - OCMockito (1.4.0):
     - OCHamcrest (~> 4.0)
-  - OHHTTPStubs (4.0.2)
-  - Specta (1.0.2)
+  - OHHTTPStubs (4.1.0)
+  - Specta (1.0.3)
   - Swizzlean (0.2.0)
 
 DEPENDENCIES:
   - AFNetworking
+  - Asterism
   - Expecta
   - Forecastr
   - KIF
@@ -47,14 +49,15 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
-  Expecta: 32604574add2c46a36f8d2f716b6c5736eb75024
+  Asterism: b2992aaf4ac2dbc66c3aea3a6412c67e3e689835
+  Expecta: 54e8a3530add08f4f0208c111355eda7cde74a53
   Forecastr: 590a5ae3ecfa417e8292192eb436de4d03126984
   KIF: a94bffe9c97e449e44f8fa481c53243d21309e1e
   OCHamcrest: 6f03ffa81d12feab872638490a44ab0a6d3aca10
   OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
   OCMockito: 4981140c9a9ec06c31af40f636e3c0f25f27e6b2
-  OHHTTPStubs: dbd1957d414659783e07b49c961940b7564c23d9
-  Specta: 9cec98310dca411f7c7ffd6943552b501622abfe
+  OHHTTPStubs: f3473ab21dbf0815253ac96b977d5c36f1daad09
+  Specta: cf3e4188cf35375c3ee2cd03f8db8f1f4ef98234
   Swizzlean: 6ef3e5a33063b7cd99dc39f8c55164dc55d9a021
 
-COCOAPODS: 0.38.0
+COCOAPODS: 0.38.2
