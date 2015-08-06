@@ -8,6 +8,7 @@
 
 #import "FISAPIClient.h"
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
+#import "FISAddLocationViewController.h"
 
 #define API_KEY @"4884f098b2eb01ac21ff346a9c480600a00b6df4"
 #define BASE_URL @"http://locationtrivia.herokuapp.com/"
@@ -24,6 +25,10 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedClient = [[self alloc] init];
+        
+        
+
+        
     });
     
     return sharedClient;

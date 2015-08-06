@@ -41,7 +41,12 @@ describe(@"FISAPIClient", ^{
                 
                 return [request.URL.host isEqualToString:@"locationtrivia.herokuapp.com"];
             }
+                        
                                            withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
+                                               
+                                               NSString *requestType = request.HTTPMethod;
+                                               
+                                               expect(requestType).to.equal(@"GET");
                                                
                                                fakeSON = @[ @{ @"id": @"939",
                                                                @"name": name,
@@ -108,6 +113,69 @@ describe(@"FISAPIClient", ^{
             }
                                            withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
                                                
+                                               NSString *requestType = request.HTTPMethod;
+                                               
+                                               NSString *stuff = [NSString stringWithUTF8String:(char*)[[request HTTPBody] bytes]];
+                                               NSURLComponents *comps = [NSURLComponents componentsWithString:@"?a=b&c=d"];
+                                               
+                                               NSDictionary *queryItems = ASTIndexBy(comps.queryItems, @"name");
+                                               NSLog(@"%@", ((NSURLQueryItem *)queryItems[@"a"]).value);
+                                               
+                                               
+                                               
+                                               NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:request.URL resolvingAgainstBaseURL:NO];
+                                               
+                                               
+                                               NSLog(@"COmponenets; %@", urlComponents);
+                                               NSArray *queryItems = urlComponents.queryItems;
+//                                               NSString *param1 = [self valueForKey:@"longitude" fromQueryItems:queryItems];
+                                               
+                                               NSLog(@"Michael Jordan: %@", queryItems);
+                                               
+                    
+                                               
+//                                               - (NSString *)valueForKey:(NSString *)key
+//                                           fromQueryItems:(NSArray *)queryItems
+//                                               {
+                                                   NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name=%@", @"longitude"];
+                                                   NSURLQueryItem *queryItem = [[queryItems filteredArrayUsingPredicate:predicate]
+                                                                                firstObject];
+                                               
+                                               NSLog(@"IS THERE A VALUE HERE: %@", queryItem);
+                                                   NSString *queryThing =  queryItem.value;
+                                               
+                                               
+                                               NSLog(@"WHAT IS IN THIS GOD DAMN THING!!: %@", queryThing);
+//                                               }
+                                               
+                                               NSString *theThing = [NSURLProtocol propertyForKey:@"name" inRequest:request];
+                                               
+                                               
+                                               NSLog(@"THIS SHOULD BE ITTT*@*@*@*@*@ %@", theThing);
+                                               
+                                               NSLog(@"---------------------------------------------");
+                                               
+                                               NSLog(@"%@", stuff);
+                                               
+                                               
+                                               NSLog(@"---------------------------------------------");
+
+                                               
+                                              
+                                               
+                                               expect(requestType).to.equal(@"POST");
+                                               
+                                               
+                                               
+//                                               @property (readonly, copy) NSDictionary *allHTTPHeaderFields;
+//                                               
+//                                               
+//                                               @property (readonly, copy) NSData *HTTPBody;
+//                                               
+//                                               @property (readonly, retain) NSInputStream *HTTPBodyStream;
+                                               
+                                               
+
                                                fakeSONdictionary = @{ @"id": @"939",
                                                                       @"name": name,
                                                                       @"latitude": @"105",
@@ -143,9 +211,8 @@ describe(@"FISAPIClient", ^{
                      expect(location[@"trivia"]).to.beAKindOf([NSArray class]);
                      
                      //Not testing the locationFromDictionary: method again as it was tested in the above test.
-                     
+
                      done ();
-                     
                  } failure:^(NSError *error) {
                      
                      failure(@"This should not happen");
@@ -166,6 +233,8 @@ describe(@"FISAPIClient", ^{
             }
                                            withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
                                                
+                                               NSString *requestType = request.HTTPMethod;
+                                               
                                                fakeSON = @[];
                                                return [OHHTTPStubsResponse responseWithJSONObject:fakeSON
                                                                                        statusCode:200
@@ -185,7 +254,6 @@ describe(@"FISAPIClient", ^{
                      expect(success).to.equal(YES);
                      
                      done();
-                     
                  } failure:^(NSError *error) {
                      
                      failure(@"This should not happen");
@@ -204,6 +272,8 @@ describe(@"FISAPIClient", ^{
                 return [request.URL.host isEqualToString:@"locationtrivia.herokuapp.com"];
             }
                                            withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
+                                               
+                                               NSString *requestType = request.HTTPMethod;
                                                
                                                trivaCreated = @{ @"content": triviaContent,
                                                                  @"created_at": @"2015-07-262",
@@ -242,6 +312,7 @@ describe(@"FISAPIClient", ^{
                      //Testing that the triviumFromDictionary: method is properly implemented.  Number of likes isn't stored in the API, it should be instantiated with 0 likes of type NSInteger.
                      expect(trivia).to.beKindOf([FISTrivia class]);
                      expect(trivia.triviaID).to.equal(@"999");
+#warning FIX THIS DUDE!
                      expect(trivia.locationID).to.equal(@"939");
                      expect(trivia.content).to.equal(@"Great restaurants");
                      expect(trivia.likes).to.equal(0);
@@ -268,6 +339,10 @@ describe(@"FISAPIClient", ^{
             }
                                            withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
                                                
+                                               NSString *requestType = request.HTTPMethod;
+                                               
+                                               NSLog(@"=*=*=*=*=*=*=* Request Type: %@", requestType);
+                                               
                                                trivaCreated = @{ };
                                                return [OHHTTPStubsResponse responseWithJSONObject:trivaCreated
                                                                                        statusCode:200
@@ -285,7 +360,6 @@ describe(@"FISAPIClient", ^{
                  withSuccess:^(BOOL success) {
                      
                      //This test will still pass if the user makes any form of request (GET, POST, etc.).  This goes under the assumption that a DELETE request is made using the triviumID and location ID
-                     
                      expect(success).to.equal(YES);
                      done();
                      
