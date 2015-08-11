@@ -71,8 +71,6 @@
     
     [self.requestOperationManager POST:@"/locations.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"%@", responseObject);
-        
         success(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -86,8 +84,6 @@
     NSString *deleteString = [NSString stringWithFormat:@"/locations/%@.json", locationID];
     
     [self.requestOperationManager DELETE:deleteString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSLog(@"From the delete request in the API Client: %@", responseObject);
         
         success(YES);
         
@@ -108,9 +104,7 @@
     NSString *triviumString = [NSString stringWithFormat:@"/locations/%@/trivia.json", locationID];
     
     [self.requestOperationManager POST:triviumString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSLog(@"What is the response object in createTrivium: %@", responseObject);
-        
+                
         success(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(error);

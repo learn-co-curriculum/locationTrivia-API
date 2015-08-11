@@ -15,6 +15,8 @@
 #define EXP_SHORTHAND
 #import "Expecta.h"
 #import <AFNetworking.h>
+#import <Asterism.h>
+#import "FISTestHelper.h"
 
 SpecBegin(FISAPIClient)
 
@@ -30,6 +32,9 @@ describe(@"FISAPIClient", ^{
     __block NSString *idOfLocation = @"939";
     __block NSDictionary *trivaCreated;
     __block NSString *triviaContent = @"Great restaurants";
+    __block NSString *latitudeValue;
+    __block NSString *longitudeValue;
+    __block NSString *locationName;
     
     
     describe(@"requestLocationsWithSuccess:failure:", ^{
@@ -44,9 +49,7 @@ describe(@"FISAPIClient", ^{
                         
                                            withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
                                                
-                                               NSString *requestType = request.HTTPMethod;
-                                               
-                                               expect(requestType).to.equal(@"GET");
+                                               expect(request.HTTPMethod).to.equal(@"GET");
                                                
                                                fakeSON = @[ @{ @"id": @"939",
                                                                @"name": name,
@@ -113,69 +116,20 @@ describe(@"FISAPIClient", ^{
             }
                                            withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
                                                
-                                               NSString *requestType = request.HTTPMethod;
+                                               [FISTestHelper extractLatitudeLongitudeAndNameFromRequest:request
+                                                                                     withCompletionBlock:^(NSString *latitude, NSString *longitude, NSString *nameOfLocation) {
+                                                                                         
+                                                                                         latitudeValue = latitude;
+                                                                                         longitudeValue = longitude;
+                                                                                         locationName = nameOfLocation;
+                                                                                     }];
                                                
-                                               NSString *stuff = [NSString stringWithUTF8String:(char*)[[request HTTPBody] bytes]];
-                                               NSURLComponents *comps = [NSURLComponents componentsWithString:@"?a=b&c=d"];
+                                
+                                               expect(request.HTTPMethod).to.equal(@"POST");
+                                               expect(locationName).to.equal(@"coolTown");
+                                               expect(latitudeValue).to.equal(@"100");
+                                               expect(longitudeValue).to.equal(@"50");
                                                
-                                               NSDictionary *queryItems = ASTIndexBy(comps.queryItems, @"name");
-                                               NSLog(@"%@", ((NSURLQueryItem *)queryItems[@"a"]).value);
-                                               
-                                               
-                                               
-                                               NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:request.URL resolvingAgainstBaseURL:NO];
-                                               
-                                               
-                                               NSLog(@"COmponenets; %@", urlComponents);
-                                               NSArray *queryItems = urlComponents.queryItems;
-//                                               NSString *param1 = [self valueForKey:@"longitude" fromQueryItems:queryItems];
-                                               
-                                               NSLog(@"Michael Jordan: %@", queryItems);
-                                               
-                    
-                                               
-//                                               - (NSString *)valueForKey:(NSString *)key
-//                                           fromQueryItems:(NSArray *)queryItems
-//                                               {
-                                                   NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name=%@", @"longitude"];
-                                                   NSURLQueryItem *queryItem = [[queryItems filteredArrayUsingPredicate:predicate]
-                                                                                firstObject];
-                                               
-                                               NSLog(@"IS THERE A VALUE HERE: %@", queryItem);
-                                                   NSString *queryThing =  queryItem.value;
-                                               
-                                               
-                                               NSLog(@"WHAT IS IN THIS GOD DAMN THING!!: %@", queryThing);
-//                                               }
-                                               
-                                               NSString *theThing = [NSURLProtocol propertyForKey:@"name" inRequest:request];
-                                               
-                                               
-                                               NSLog(@"THIS SHOULD BE ITTT*@*@*@*@*@ %@", theThing);
-                                               
-                                               NSLog(@"---------------------------------------------");
-                                               
-                                               NSLog(@"%@", stuff);
-                                               
-                                               
-                                               NSLog(@"---------------------------------------------");
-
-                                               
-                                              
-                                               
-                                               expect(requestType).to.equal(@"POST");
-                                               
-                                               
-                                               
-//                                               @property (readonly, copy) NSDictionary *allHTTPHeaderFields;
-//                                               
-//                                               
-//                                               @property (readonly, copy) NSData *HTTPBody;
-//                                               
-//                                               @property (readonly, retain) NSInputStream *HTTPBodyStream;
-                                               
-                                               
-
                                                fakeSONdictionary = @{ @"id": @"939",
                                                                       @"name": name,
                                                                       @"latitude": @"105",
@@ -211,7 +165,7 @@ describe(@"FISAPIClient", ^{
                      expect(location[@"trivia"]).to.beAKindOf([NSArray class]);
                      
                      //Not testing the locationFromDictionary: method again as it was tested in the above test.
-
+                     
                      done ();
                  } failure:^(NSError *error) {
                      
@@ -233,9 +187,9 @@ describe(@"FISAPIClient", ^{
             }
                                            withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
                                                
-                                               NSString *requestType = request.HTTPMethod;
+                                               expect(request.HTTPMethod).to.equal(@"DELETE");
                                                
-                                               fakeSON = @[];
+                                               fakeSON = nil;
                                                return [OHHTTPStubsResponse responseWithJSONObject:fakeSON
                                                                                        statusCode:200
                                                                                           headers:@{ @"Content-type": @"application/json"}];
@@ -250,7 +204,7 @@ describe(@"FISAPIClient", ^{
                  deleteLocationWithID:idOfLocation
                  withSuccess:^(BOOL success) {
                      
-                     //This test will still pass if the user makes any form of request (GET, POST, etc.).  This goes under the assumption that a DELETE request is made using the id of the location in the method.
+                     
                      expect(success).to.equal(YES);
                      
                      done();
