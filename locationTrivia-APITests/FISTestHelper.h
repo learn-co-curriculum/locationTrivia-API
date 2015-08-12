@@ -14,4 +14,7 @@
 + (void)extractLatitudeLongitudeAndNameFromRequest:(NSURLRequest *)request
                                withCompletionBlock:(void (^)(NSString *latitude, NSString *longitude, NSString *nameOfLocation))completionBlock;
 
++ (NSString *)extractTriviumFromRequest:(NSURLRequest *)request;
+
 @end
+

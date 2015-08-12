@@ -51,6 +51,7 @@
     parameters[@"key"] = API_KEY;
     
     [self.requestOperationManager GET:@"/locations.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
         success(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
