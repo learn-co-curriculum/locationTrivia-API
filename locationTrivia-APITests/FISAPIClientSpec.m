@@ -32,7 +32,6 @@ describe(@"FISAPIClient", ^{
     __block NSString *idOfLocation = @"939";
     __block NSDictionary *trivaCreated;
     __block NSString *triviaContent = @"Great restaurants";
-  
     
     
     describe(@"requestLocationsWithSuccess:failure:", ^{
@@ -49,20 +48,7 @@ describe(@"FISAPIClient", ^{
                                                
                                                expect(request.HTTPMethod).to.equal(@"GET");
                                                
-                                               fakeSON = @[ @{ @"id": @"939",
-                                                               @"name": name,
-                                                               @"latitude": @"100",
-                                                               @"longitude": @"50",
-                                                               @"trivia": @[ @{ @"id": @"460",
-                                                                                @"location_id": @"939",
-                                                                                @"content": @"Is tall",
-                                                                                @"created_at": @"2015-03-17T15:29:27.743Z",
-                                                                                @"updated_at": @"2015-03-17T15:29:27.743Z" } ],
-                                                               @"url": @"https://locationtrivia.herokuapp.com/locations/999.json?key=xxxx" } ];
-                                               
-                                               return [OHHTTPStubsResponse responseWithJSONObject:fakeSON
-                                                                                       statusCode:200
-                                                                                          headers:@{ @"Content-type": @"application/json"}];
+                                               return [FISTestHelper stubResponseWithType:Array];
                                            }];
         });
         
@@ -80,7 +66,7 @@ describe(@"FISAPIClient", ^{
                     expect(dictionaryInArrayOfLocations).to.beAKindOf([NSDictionary class]);
                     expect(dictionaryInArrayOfLocations[@"id"]).to.equal(@"939");
                     expect(dictionaryInArrayOfLocations[@"name"]).to.equal(@"coolTown");
-                    expect(dictionaryInArrayOfLocations[@"latitude"]).to.equal(@"100");
+                    expect(dictionaryInArrayOfLocations[@"latitude"]).to.equal(@"105");
                     expect(dictionaryInArrayOfLocations[@"longitude"]).to.equal(@"50");
                     expect(dictionaryInArrayOfLocations[@"trivia"]).to.beAKindOf([NSArray class]);
                     expect(dictionaryInArrayOfLocations[@"url"]).to.beAKindOf([NSString class]);
@@ -95,7 +81,7 @@ describe(@"FISAPIClient", ^{
                     
                 } failure:^(NSError *error) {
                     
-                    failure(@"This should not happen");
+                    failure(@"The Request Locations method is not implemented correctly.  Make sure you're making the appropiate GET request.");
                     done();
                 }];
             });
@@ -126,27 +112,15 @@ describe(@"FISAPIClient", ^{
                                                                                          locationName = nameOfLocation;
                                                                                      }];
                                                
-                                
+                                               
                                                //Testing the parameters of the POST request
                                                expect(request.HTTPMethod).to.equal(@"POST");
                                                expect(locationName).to.equal(@"coolTown");
                                                expect(latitudeValue).to.equal(@"100");
                                                expect(longitudeValue).to.equal(@"50");
                                                
-                                               fakeSONdictionary = @{ @"id": @"939",
-                                                                      @"name": name,
-                                                                      @"latitude": @"105",
-                                                                      @"longitude": @"50",
-                                                                      @"trivia": @[ @{ @"id": @"460",
-                                                                                       @"location_id": @"939",
-                                                                                       @"content": @"Is tall",
-                                                                                       @"created_at": @"2015-03-17T15:29:27.743Z",
-                                                                                       @"updated_at": @"2015-03-17T15:29:27.743Z" } ],
-                                                                      @"url": @"https://locationtrivia.herokuapp.com/locations/999.json?key=xxxx" };
+                                               return [FISTestHelper stubResponseWithType:Dictionary];
                                                
-                                               return [OHHTTPStubsResponse responseWithJSONObject:fakeSONdictionary
-                                                                                       statusCode:200
-                                                                                          headers:@{ @"Content-type": @"application/json"}];
                                            }];
         });
         
@@ -172,7 +146,7 @@ describe(@"FISAPIClient", ^{
                      done ();
                  } failure:^(NSError *error) {
                      
-                     failure(@"This should not happen");
+                     failure(@"The Create Locations method is not implemented correctly.  Make sure you're making the appropiate POST request passing in the correct parameters.");
                      done();
                      
                  }];
@@ -194,7 +168,7 @@ describe(@"FISAPIClient", ^{
                                                
                                                expect(request.HTTPMethod).to.equal(@"DELETE");
                                                expect(urlFromRequest).to.equal(@"http://locationtrivia.herokuapp.com/locations/939.json");
-
+                                               
                                                //If this is set to NIL, test will not run.  The fakeSON needs to be something (in this case, it's an empty array and not reflective of what the user will see in their app.)
                                                fakeSON = @[];
                                                return [OHHTTPStubsResponse responseWithJSONObject:fakeSON
@@ -217,7 +191,7 @@ describe(@"FISAPIClient", ^{
                      done();
                  } failure:^(NSError *error) {
                      
-                     failure(@"This should not happen");
+                     failure(@"The Delete Locations method is not implemented correctly.  Make sure you're making the appropiate DELETE request.");
                      done();
                  }];
             });
@@ -233,25 +207,15 @@ describe(@"FISAPIClient", ^{
                 return [request.URL.host isEqualToString:@"locationtrivia.herokuapp.com"];
             }
                                            withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
-                                        
+                                               
                                                NSString *triviaValue = [FISTestHelper extractTriviumFromRequest:request];
-                                        
+                                               
                                                expect(triviaValue).to.equal(@"Great restaurants");
                                                expect(request.HTTPMethod).to.equal(@"POST");
+                                               
+                                               
+                                               return [FISTestHelper stubResponseWithType:TriviaDictionary];
                                               
-                                               trivaCreated = @{ @"content": triviaContent,
-                                                                 @"created_at": @"2015-07-262",
-                                                                 @"id": @"999",
-                                                                 @"location": @{ @"created_at" : @"2015-03",
-                                                                                 @"id": idOfLocation,
-                                                                                 @"latitude": @"55",
-                                                                                 @"longitude": @"100",
-                                                                                 @"name": @"coolPlace",
-                                                                                 @"updated_at": @"2015-05" },
-                                                                 @"updated_at": @"2015-07-2622" };
-                                               return [OHHTTPStubsResponse responseWithJSONObject:trivaCreated
-                                                                                       statusCode:200
-                                                                                          headers:@{ @"Content-type": @"application/json"}];
                                            }];
         });
         
@@ -277,7 +241,7 @@ describe(@"FISAPIClient", ^{
                      expect(trivia).to.beKindOf([FISTrivia class]);
                      expect(trivia.triviaID).to.equal(@"999");
 #warning FIX THIS DUDE!
-//                     expect(trivia.locationID).to.equal(@"939");
+                     //                     expect(trivia.locationID).to.equal(@"939");
                      expect(trivia.content).to.equal(@"Great restaurants");
                      expect(trivia.likes).to.equal(0);
                      
@@ -303,8 +267,11 @@ describe(@"FISAPIClient", ^{
             }
                                            withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
                                                
+                                               NSString *urlFromRequest = [request.URL absoluteString];
+                                               
                                                expect(request.HTTPMethod).to.equal(@"DELETE");
-
+                                               expect(urlFromRequest).to.equal(@"http://locationtrivia.herokuapp.com/locations/939/trivia/999.json");
+                                               
                                                //If this is set to NIL, test will not run.  The fakeSON needs to be something (in this case, it's an empty dictionary and not reflective of what the user will see in their app.)
                                                trivaCreated = @{ };
                                                return [OHHTTPStubsResponse responseWithJSONObject:trivaCreated
@@ -322,7 +289,6 @@ describe(@"FISAPIClient", ^{
                  withLocationID:@"939"
                  withSuccess:^(BOOL success) {
                      
-                     //This test will still pass if the user makes any form of request (GET, POST, etc.).  This goes under the assumption that a DELETE request is made using the triviumID and location ID
                      expect(success).to.equal(YES);
                      done();
                      

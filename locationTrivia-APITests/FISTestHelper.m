@@ -8,9 +8,13 @@
 
 #import "FISTestHelper.h"
 
+
 @interface FISTestHelper ()
 
 + (NSDictionary *)createDictionaryOfQueryItemsWithRequest:(NSURLRequest *)request;
++ (NSArray *)createFakeArrayJSON;
++ (NSDictionary *)createFakeDictJSON;
++ (NSDictionary *)createFakeTrivia;
 
 @end
 
@@ -18,11 +22,13 @@
 @implementation FISTestHelper
 
 
+
+
 + (void)extractLatitudeLongitudeAndNameFromRequest:(NSURLRequest *)request
                                withCompletionBlock:(void (^)(NSString *latitude, NSString *longitude, NSString *nameOfLocation))completionBlock {
     
     NSDictionary *queryItems = [FISTestHelper createDictionaryOfQueryItemsWithRequest:request];
-
+    
     NSString *latitudeValue = ((NSURLQueryItem *)queryItems[@"locationlatitude"]).value;
     NSString *longitudeValue = ((NSURLQueryItem *)queryItems[@"locationlongitude"]).value;
     NSString *locationName = ((NSURLQueryItem *)queryItems[@"locationname"]).value;
@@ -53,5 +59,83 @@
     return queryItems;
 }
 
++ (OHHTTPStubsResponse *)stubResponseWithType:(StubResponseType)type {
+    
+    switch (type) {
+            
+        case Array: {
+            
+            return [OHHTTPStubsResponse responseWithJSONObject:[FISTestHelper createFakeArrayJSON]
+                                                    statusCode:200
+                                                       headers:@{ @"Content-type": @"application/json"}];
+            break;
+        }
+            
+        case Dictionary: {
+            
+            return [OHHTTPStubsResponse responseWithJSONObject:[FISTestHelper createFakeDictJSON]
+                                                    statusCode:200
+                                                       headers:@{ @"Content-type": @"application/json"}];
+            break;
+        }
+            
+        case TriviaDictionary: {
+            
+            return [OHHTTPStubsResponse responseWithJSONObject:[FISTestHelper createFakeTrivia]
+                                                    statusCode:200
+                                                       headers:@{ @"Content-type": @"application/json"}];
+            break;
+        }
+            
+        default:
+            
+            return nil;
+            break;
+    }
+}
+
++ (NSArray *)createFakeArrayJSON {
+    
+    NSDictionary *fakeSONDict = [FISTestHelper createFakeDictJSON];
+    NSArray *fakeSON = @[fakeSONDict];
+    
+    return fakeSON;
+}
+
++ (NSDictionary *)createFakeDictJSON {
+    
+    NSDictionary *fakeSONdictionary = @{ @"id": @"939",
+                                         @"name": @"coolTown",
+                                         @"latitude": @"105",
+                                         @"longitude": @"50",
+                                         @"trivia": @[ @{ @"id": @"460",
+                                                          @"location_id": @"939",
+                                                          @"content": @"Is tall",
+                                                          @"created_at": @"2015-03-17T15:29:27.743Z",
+                                                          @"updated_at": @"2015-03-17T15:29:27.743Z" } ],
+                                         @"url": @"https://locationtrivia.herokuapp.com/locations/999.json?key=xxxx" };
+    
+    return fakeSONdictionary;
+}
+
++ (NSDictionary *)createFakeTrivia {
+    
+    NSDictionary *fakeTriviaDict = @{ @"content": @"Great restaurants",
+                                      @"created_at": @"2015-07-262",
+                                      @"id": @"999",
+                                      @"location": @{ @"created_at" : @"2015-03",
+                                                      @"id": @"939",
+                                                      @"latitude": @"55",
+                                                      @"longitude": @"100",
+                                                      @"name": @"coolPlace",
+                                                      @"updated_at": @"2015-05" },
+                                      @"updated_at": @"2015-07-2622" };
+    
+    
+    return fakeTriviaDict;
+    
+    
+    
+}
 
 @end
