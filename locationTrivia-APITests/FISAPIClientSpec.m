@@ -15,20 +15,18 @@
 #define EXP_SHORTHAND
 #import "Expecta.h"
 #import <AFNetworking.h>
+#import <Asterism.h>
+#import "FISTestHelper.h"
 
 SpecBegin(FISAPIClient)
 
+
 describe(@"FISAPIClient", ^{
     
-    __block NSArray *fakeSON;
-    __block NSDictionary *fakeSONdictionary;
     __block id<OHHTTPStubsDescriptor> httpStub;
     __block NSString *name = @"coolTown";
     __block NSNumber *latitude = @100;
     __block NSNumber *longitude = @50;
-    __block NSString *idOfLocation = @"939";
-    __block NSDictionary *trivaCreated;
-    __block NSString *triviaContent = @"Great restaurants";
     
     
     describe(@"requestLocationsWithSuccess:failure:", ^{
@@ -40,22 +38,12 @@ describe(@"FISAPIClient", ^{
                 
                 return [request.URL.host isEqualToString:@"locationtrivia.herokuapp.com"];
             }
+                        
                                            withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
                                                
-                                               fakeSON = @[ @{ @"id": @"939",
-                                                               @"name": name,
-                                                               @"latitude": @"100",
-                                                               @"longitude": @"50",
-                                                               @"trivia": @[ @{ @"id": @"460",
-                                                                                @"location_id": @"939",
-                                                                                @"content": @"Is tall",
-                                                                                @"created_at": @"2015-03-17T15:29:27.743Z",
-                                                                                @"updated_at": @"2015-03-17T15:29:27.743Z" } ],
-                                                               @"url": @"https://locationtrivia.herokuapp.com/locations/999.json?key=xxxx" } ];
+                                               expect(request.HTTPMethod).to.equal(@"GET");
                                                
-                                               return [OHHTTPStubsResponse responseWithJSONObject:fakeSON
-                                                                                       statusCode:200
-                                                                                          headers:@{ @"Content-type": @"application/json"}];
+                                               return [FISTestHelper stubResponseWithType:Array];
                                            }];
         });
         
@@ -73,7 +61,7 @@ describe(@"FISAPIClient", ^{
                     expect(dictionaryInArrayOfLocations).to.beAKindOf([NSDictionary class]);
                     expect(dictionaryInArrayOfLocations[@"id"]).to.equal(@"939");
                     expect(dictionaryInArrayOfLocations[@"name"]).to.equal(@"coolTown");
-                    expect(dictionaryInArrayOfLocations[@"latitude"]).to.equal(@"100");
+                    expect(dictionaryInArrayOfLocations[@"latitude"]).to.equal(@"105");
                     expect(dictionaryInArrayOfLocations[@"longitude"]).to.equal(@"50");
                     expect(dictionaryInArrayOfLocations[@"trivia"]).to.beAKindOf([NSArray class]);
                     expect(dictionaryInArrayOfLocations[@"url"]).to.beAKindOf([NSString class]);
@@ -81,14 +69,14 @@ describe(@"FISAPIClient", ^{
                     //Testing that the locationFromDictionary: method is properly implemented.
                     expect(locationFromRequest).to.beKindOf([FISLocation class]);
                     expect(locationFromRequest.name).to.equal(@"coolTown");
-                    expect(locationFromRequest.latitude).to.equal(@100);
+                    expect(locationFromRequest.latitude).to.equal(@105);
                     expect(locationFromRequest.longitude).to.equal(@50);
                     
                     done();
                     
                 } failure:^(NSError *error) {
                     
-                    failure(@"This should not happen");
+                    failure(@"The Request Locations method is not implemented correctly.  Make sure you're making the appropiate GET request.");
                     done();
                 }];
             });
@@ -107,20 +95,27 @@ describe(@"FISAPIClient", ^{
             }
                                            withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
                                                
-                                               fakeSONdictionary = @{ @"id": @"939",
-                                                                      @"name": name,
-                                                                      @"latitude": @"105",
-                                                                      @"longitude": @"50",
-                                                                      @"trivia": @[ @{ @"id": @"460",
-                                                                                       @"location_id": @"939",
-                                                                                       @"content": @"Is tall",
-                                                                                       @"created_at": @"2015-03-17T15:29:27.743Z",
-                                                                                       @"updated_at": @"2015-03-17T15:29:27.743Z" } ],
-                                                                      @"url": @"https://locationtrivia.herokuapp.com/locations/999.json?key=xxxx" };
+                                               __block NSString *latitudeValue;
+                                               __block NSString *longitudeValue;
+                                               __block NSString *locationName;
                                                
-                                               return [OHHTTPStubsResponse responseWithJSONObject:fakeSONdictionary
-                                                                                       statusCode:200
-                                                                                          headers:@{ @"Content-type": @"application/json"}];
+                                               [FISTestHelper extractLatitudeLongitudeAndNameFromRequest:request
+                                                                                     withCompletionBlock:^(NSString *latitude, NSString *longitude, NSString *nameOfLocation) {
+                                                                                         
+                                                                                         latitudeValue = latitude;
+                                                                                         longitudeValue = longitude;
+                                                                                         locationName = nameOfLocation;
+                                                                                     }];
+                                               
+                                               
+                                               //Testing the parameters of the POST request
+                                               expect(request.HTTPMethod).to.equal(@"POST");
+                                               expect(locationName).to.equal(@"coolTown");
+                                               expect(latitudeValue).to.equal(@"100");
+                                               expect(longitudeValue).to.equal(@"50");
+                                               
+                                               return [FISTestHelper stubResponseWithType:Dictionary];
+                                               
                                            }];
         });
         
@@ -144,10 +139,9 @@ describe(@"FISAPIClient", ^{
                      //Not testing the locationFromDictionary: method again as it was tested in the above test.
                      
                      done ();
-                     
                  } failure:^(NSError *error) {
                      
-                     failure(@"This should not happen");
+                     failure(@"The Create Locations method is not implemented correctly.  Make sure you're making the appropiate POST request passing in the correct parameters.");
                      done();
                      
                  }];
@@ -165,7 +159,13 @@ describe(@"FISAPIClient", ^{
             }
                                            withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
                                                
-                                               fakeSON = @[];
+                                               NSString *urlFromRequest = [request.URL absoluteString];
+                                               
+                                               expect(request.HTTPMethod).to.equal(@"DELETE");
+                                               expect(urlFromRequest).to.equal(@"http://locationtrivia.herokuapp.com/locations/939.json");
+                                               
+                                               //If this is set to NIL, test will not run.  The fakeSON needs to be something (in this case, it's an empty array and not reflective of what the user will see in their app.)
+                                               NSArray *fakeSON = @[];
                                                return [OHHTTPStubsResponse responseWithJSONObject:fakeSON
                                                                                        statusCode:200
                                                                                           headers:@{ @"Content-type": @"application/json"}];
@@ -177,17 +177,15 @@ describe(@"FISAPIClient", ^{
             waitUntil(^(DoneCallback done) {
                 
                 [[FISAPIClient sharedClient]
-                 deleteLocationWithID:idOfLocation
+                 deleteLocationWithID:@"939"
                  withSuccess:^(BOOL success) {
                      
-                     //This test will still pass if the user makes any form of request (GET, POST, etc.).  This goes under the assumption that a DELETE request is made using the id of the location in the method.
                      expect(success).to.equal(YES);
                      
                      done();
-                     
                  } failure:^(NSError *error) {
                      
-                     failure(@"This should not happen");
+                     failure(@"The Delete Locations method is not implemented correctly.  Make sure you're making the appropiate DELETE request.");
                      done();
                  }];
             });
@@ -204,19 +202,12 @@ describe(@"FISAPIClient", ^{
             }
                                            withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
                                                
-                                               trivaCreated = @{ @"content": triviaContent,
-                                                                 @"created_at": @"2015-07-262",
-                                                                 @"id": @"999",
-                                                                 @"location": @{ @"created_at" : @"2015-03",
-                                                                                 @"id": idOfLocation,
-                                                                                 @"latitude": @"55",
-                                                                                 @"longitude": @"100",
-                                                                                 @"name": @"coolPlace",
-                                                                                 @"updated_at": @"2015-05" },
-                                                                 @"updated_at": @"2015-07-2622" };
-                                               return [OHHTTPStubsResponse responseWithJSONObject:trivaCreated
-                                                                                       statusCode:200
-                                                                                          headers:@{ @"Content-type": @"application/json"}];
+                                               NSString *triviaValue = [FISTestHelper extractTriviumFromRequest:request];
+                                               
+                                               expect(triviaValue).to.equal(@"Great restaurants");
+                                               expect(request.HTTPMethod).to.equal(@"POST");
+                                               
+                                               return [FISTestHelper stubResponseWithType:TriviaDictionary];
                                            }];
         });
         
@@ -225,8 +216,8 @@ describe(@"FISAPIClient", ^{
             waitUntil(^(DoneCallback done) {
                 
                 [[FISAPIClient sharedClient]
-                 createTriviumWithContent:triviaContent
-                 forLocationWithID:idOfLocation
+                 createTriviumWithContent:@"Great restaurants"
+                 forLocationWithID:@"939"
                  success:^(NSDictionary *trivium) {
                      
                      FISTrivia *trivia = [FISTrivia triviumFromDictionary:trivium];
@@ -249,7 +240,7 @@ describe(@"FISAPIClient", ^{
                      
                  } failure:^(NSError *error) {
                      
-                     failure(@"This should not happen");
+                     failure(@"The Create Trivium method is not implemented correctly.  Make sure you're making the appropiate POST request passing in the correct parameters.");
                      done();
                      
                  }];
@@ -267,7 +258,13 @@ describe(@"FISAPIClient", ^{
             }
                                            withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
                                                
-                                               trivaCreated = @{ };
+                                               NSString *urlFromRequest = [request.URL absoluteString];
+                                               
+                                               expect(request.HTTPMethod).to.equal(@"DELETE");
+                                               expect(urlFromRequest).to.equal(@"http://locationtrivia.herokuapp.com/locations/939/trivia/999.json");
+                                               
+                                               //If this is set to NIL, test will not run.  The fakeSON needs to be something (in this case, it's an empty dictionary and not reflective of what the user will see in their app.)
+                                               NSDictionary *trivaCreated = @{ };
                                                return [OHHTTPStubsResponse responseWithJSONObject:trivaCreated
                                                                                        statusCode:200
                                                                                           headers:@{ @"Content-type": @"application/json"}];
@@ -283,14 +280,12 @@ describe(@"FISAPIClient", ^{
                  withLocationID:@"939"
                  withSuccess:^(BOOL success) {
                      
-                     //This test will still pass if the user makes any form of request (GET, POST, etc.).  This goes under the assumption that a DELETE request is made using the triviumID and location ID
-                     
                      expect(success).to.equal(YES);
                      done();
                      
                  } failure:^(NSError *error) {
                      
-                     failure(@"This should not happen");
+                     failure(@"The Delete Trivium method is not implemented correctly.  Make sure you're making the appropiate DELETE request.");
                      done();
                      
                  }];
