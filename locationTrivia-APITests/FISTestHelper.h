@@ -27,4 +27,3 @@ typedef NS_ENUM(NSInteger, StubResponseType) {
 + (OHHTTPStubsResponse *)stubResponseWithType:(StubResponseType)type;
 
 @end
-

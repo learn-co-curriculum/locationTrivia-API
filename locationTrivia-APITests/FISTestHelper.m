@@ -21,9 +21,6 @@
 
 @implementation FISTestHelper
 
-
-
-
 + (void)extractLatitudeLongitudeAndNameFromRequest:(NSURLRequest *)request
                                withCompletionBlock:(void (^)(NSString *latitude, NSString *longitude, NSString *nameOfLocation))completionBlock {
     
@@ -133,9 +130,6 @@
     
     
     return fakeTriviaDict;
-    
-    
-    
 }
 
 @end

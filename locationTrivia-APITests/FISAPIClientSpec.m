@@ -23,15 +23,10 @@ SpecBegin(FISAPIClient)
 
 describe(@"FISAPIClient", ^{
     
-    __block NSArray *fakeSON;
-    __block NSDictionary *fakeSONdictionary;
     __block id<OHHTTPStubsDescriptor> httpStub;
     __block NSString *name = @"coolTown";
     __block NSNumber *latitude = @100;
     __block NSNumber *longitude = @50;
-    __block NSString *idOfLocation = @"939";
-    __block NSDictionary *trivaCreated;
-    __block NSString *triviaContent = @"Great restaurants";
     
     
     describe(@"requestLocationsWithSuccess:failure:", ^{
@@ -74,7 +69,7 @@ describe(@"FISAPIClient", ^{
                     //Testing that the locationFromDictionary: method is properly implemented.
                     expect(locationFromRequest).to.beKindOf([FISLocation class]);
                     expect(locationFromRequest.name).to.equal(@"coolTown");
-                    expect(locationFromRequest.latitude).to.equal(@100);
+                    expect(locationFromRequest.latitude).to.equal(@105);
                     expect(locationFromRequest.longitude).to.equal(@50);
                     
                     done();
@@ -170,7 +165,7 @@ describe(@"FISAPIClient", ^{
                                                expect(urlFromRequest).to.equal(@"http://locationtrivia.herokuapp.com/locations/939.json");
                                                
                                                //If this is set to NIL, test will not run.  The fakeSON needs to be something (in this case, it's an empty array and not reflective of what the user will see in their app.)
-                                               fakeSON = @[];
+                                               NSArray *fakeSON = @[];
                                                return [OHHTTPStubsResponse responseWithJSONObject:fakeSON
                                                                                        statusCode:200
                                                                                           headers:@{ @"Content-type": @"application/json"}];
@@ -182,9 +177,8 @@ describe(@"FISAPIClient", ^{
             waitUntil(^(DoneCallback done) {
                 
                 [[FISAPIClient sharedClient]
-                 deleteLocationWithID:idOfLocation
+                 deleteLocationWithID:@"939"
                  withSuccess:^(BOOL success) {
-                     
                      
                      expect(success).to.equal(YES);
                      
@@ -213,9 +207,7 @@ describe(@"FISAPIClient", ^{
                                                expect(triviaValue).to.equal(@"Great restaurants");
                                                expect(request.HTTPMethod).to.equal(@"POST");
                                                
-                                               
                                                return [FISTestHelper stubResponseWithType:TriviaDictionary];
-                                              
                                            }];
         });
         
@@ -224,8 +216,8 @@ describe(@"FISAPIClient", ^{
             waitUntil(^(DoneCallback done) {
                 
                 [[FISAPIClient sharedClient]
-                 createTriviumWithContent:triviaContent
-                 forLocationWithID:idOfLocation
+                 createTriviumWithContent:@"Great restaurants"
+                 forLocationWithID:@"939"
                  success:^(NSDictionary *trivium) {
                      
                      FISTrivia *trivia = [FISTrivia triviumFromDictionary:trivium];
@@ -240,8 +232,7 @@ describe(@"FISAPIClient", ^{
                      //Testing that the triviumFromDictionary: method is properly implemented.  Number of likes isn't stored in the API, it should be instantiated with 0 likes of type NSInteger.
                      expect(trivia).to.beKindOf([FISTrivia class]);
                      expect(trivia.triviaID).to.equal(@"999");
-#warning FIX THIS DUDE!
-                     //                     expect(trivia.locationID).to.equal(@"939");
+                     expect(trivia.locationID).to.equal(@"939");
                      expect(trivia.content).to.equal(@"Great restaurants");
                      expect(trivia.likes).to.equal(0);
                      
@@ -249,7 +240,7 @@ describe(@"FISAPIClient", ^{
                      
                  } failure:^(NSError *error) {
                      
-                     failure(@"This should not happen");
+                     failure(@"The Create Trivium method is not implemented correctly.  Make sure you're making the appropiate POST request passing in the correct parameters.");
                      done();
                      
                  }];
@@ -273,7 +264,7 @@ describe(@"FISAPIClient", ^{
                                                expect(urlFromRequest).to.equal(@"http://locationtrivia.herokuapp.com/locations/939/trivia/999.json");
                                                
                                                //If this is set to NIL, test will not run.  The fakeSON needs to be something (in this case, it's an empty dictionary and not reflective of what the user will see in their app.)
-                                               trivaCreated = @{ };
+                                               NSDictionary *trivaCreated = @{ };
                                                return [OHHTTPStubsResponse responseWithJSONObject:trivaCreated
                                                                                        statusCode:200
                                                                                           headers:@{ @"Content-type": @"application/json"}];
@@ -294,7 +285,7 @@ describe(@"FISAPIClient", ^{
                      
                  } failure:^(NSError *error) {
                      
-                     failure(@"This should not happen");
+                     failure(@"The Delete Trivium method is not implemented correctly.  Make sure you're making the appropiate DELETE request.");
                      done();
                      
                  }];
