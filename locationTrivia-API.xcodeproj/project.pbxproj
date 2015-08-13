@@ -10,6 +10,7 @@
 		5B508A4C1B54028B00EB70EA /* locationTriviaViewsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B508A4B1B54028B00EB70EA /* locationTriviaViewsSpec.m */; };
 		5B508A4E1B5407C800EB70EA /* FISAPIClientSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B508A4D1B5407C800EB70EA /* FISAPIClientSpec.m */; };
 		5B508A511B540C2A00EB70EA /* FISAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B508A501B540C2A00EB70EA /* FISAPIClient.m */; };
+		5BC887991B7CE8B200C82FC6 /* FISTestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC887981B7CE8B200C82FC6 /* FISTestHelper.m */; };
 		9BF5250CE6E7521B006C7B8F /* libPods-locationTrivia-API.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F85A0C473DCB0614A26426D7 /* libPods-locationTrivia-API.a */; };
 		D80594AD1976F1B300116B35 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80594AC1976F1B300116B35 /* Foundation.framework */; };
 		D80594AF1976F1B300116B35 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80594AE1976F1B300116B35 /* CoreGraphics.framework */; };
@@ -50,6 +51,8 @@
 		5B508A4D1B5407C800EB70EA /* FISAPIClientSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FISAPIClientSpec.m; sourceTree = "<group>"; };
 		5B508A4F1B540C2A00EB70EA /* FISAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FISAPIClient.h; sourceTree = "<group>"; };
 		5B508A501B540C2A00EB70EA /* FISAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FISAPIClient.m; sourceTree = "<group>"; };
+		5BC887971B7CE8B200C82FC6 /* FISTestHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FISTestHelper.h; sourceTree = "<group>"; };
+		5BC887981B7CE8B200C82FC6 /* FISTestHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FISTestHelper.m; sourceTree = "<group>"; };
 		9EA63685DE4E8E9ACEAD2B8E /* Pods-locationTrivia-APITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locationTrivia-APITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-locationTrivia-APITests/Pods-locationTrivia-APITests.debug.xcconfig"; sourceTree = "<group>"; };
 		AE0CB22EC88D40BF9013C79A /* Pods-locationTrivia-API.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locationTrivia-API.debug.xcconfig"; path = "Pods/Target Support Files/Pods-locationTrivia-API/Pods-locationTrivia-API.debug.xcconfig"; sourceTree = "<group>"; };
 		B7080BB79891B7BA6DC9A172 /* Pods-locationTrivia-APITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locationTrivia-APITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-locationTrivia-APITests/Pods-locationTrivia-APITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -200,6 +203,8 @@
 			children = (
 				5B508A4B1B54028B00EB70EA /* locationTriviaViewsSpec.m */,
 				5B508A4D1B5407C800EB70EA /* FISAPIClientSpec.m */,
+				5BC887971B7CE8B200C82FC6 /* FISTestHelper.h */,
+				5BC887981B7CE8B200C82FC6 /* FISTestHelper.m */,
 				D80594D21976F1B300116B35 /* Supporting Files */,
 			);
 			path = "locationTrivia-APITests";
@@ -398,6 +403,7 @@
 			files = (
 				5B508A4C1B54028B00EB70EA /* locationTriviaViewsSpec.m in Sources */,
 				5B508A4E1B5407C800EB70EA /* FISAPIClientSpec.m in Sources */,
+				5BC887991B7CE8B200C82FC6 /* FISTestHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
