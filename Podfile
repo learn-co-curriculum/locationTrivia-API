@@ -4,10 +4,13 @@ source 'https://github.com/CocoaPods/Specs.git'
 # platform :ios, "6.0"
 
 target "locationTrivia-API" do
+
   pod 'AFNetworking'
+
 end
 
 target "locationTrivia-APITests" do
+
   pod 'Forecastr'
   pod 'Specta'
   pod 'Expecta'                                                 
