@@ -22,29 +22,27 @@
  *
  ***********************************************************************************/
 
-// For SDK 7.1 Compatibility (as this macro was only included starting SDK 8.0)
-#ifndef NS_DESIGNATED_INITIALIZER
-  #if __has_attribute(objc_designated_initializer)
-    #define NS_DESIGNATED_INITIALIZER __attribute__((objc_designated_initializer))
-  #else
-    #define NS_DESIGNATED_INITIALIZER
-  #endif
-#endif
 
 ////////////////////////////////////////////////////////////////////////////////
 #pragma mark - Imports
 
 #import <Foundation/Foundation.h>
+
+#import "Compatibility.h"
 #import "OHHTTPStubsResponse.h"
+
 // Because this is supposed to be an umbrella header, we should import every public headers here
 #import "OHHTTPStubsResponse+HTTPMessage.h"
 #import "OHHTTPStubsResponse+JSON.h"
+#import "OHPathHelpers.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////
 #pragma mark - Types
 
 typedef BOOL(^OHHTTPStubsTestBlock)(NSURLRequest* request);
-typedef OHHTTPStubsResponse*(^OHHTTPStubsResponseBlock)(NSURLRequest* request);
+typedef OHHTTPStubsResponse* __nonnull (^OHHTTPStubsResponseBlock)( NSURLRequest* request);
 
 /**
  *  This opaque type represents an installed stub and is used to uniquely
@@ -64,7 +62,7 @@ typedef OHHTTPStubsResponse*(^OHHTTPStubsResponseBlock)(NSURLRequest* request);
  *  This is especially useful if you dump all installed stubs using `allStubs`
  *  or if you want to log which stubs are being triggered using `onStubActivation:`.
  */
-@property(nonatomic, strong) NSString* name;
+@property(nonatomic, strong, nullable) NSString* name;
 @end
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -92,7 +90,7 @@ typedef OHHTTPStubsResponse*(^OHHTTPStubsResponseBlock)(NSURLRequest* request);
  *  @return a stub descriptor that uniquely identifies the stub and can be later used to remove it with `removeStub:`.
  *
  *  @note The returned stub descriptor is retained (`__strong` reference) by `OHHTTPStubs`
- *        until it is removed (with one of the `removeStub:`/`removeLastStub`/`removeAllStubs`
+ *        until it is removed (with one of the `removeStub:` / `removeAllStubs`
  *        methods); it is thus recommended to keep it in a `__weak` storage (and not `__strong`)
  *        in your app code, to let the stub descriptor be destroyed and let the variable go
  *        back to `nil` automatically when the stub is removed.
@@ -110,11 +108,6 @@ typedef OHHTTPStubsResponse*(^OHHTTPStubsResponseBlock)(NSURLRequest* request);
  *          not a valid stub identifier
  */
 +(BOOL)removeStub:(id<OHHTTPStubsDescriptor>)stubDesc;
-
-/**
- *  Remove the last added stub from the stubs list
- */
-+(void)removeLastStub;
 
 /**
  *  Remove all the stubs from the stubs list.
@@ -185,3 +178,4 @@ typedef OHHTTPStubsResponse*(^OHHTTPStubsResponseBlock)(NSURLRequest* request);
 
 @end
 
+NS_ASSUME_NONNULL_END

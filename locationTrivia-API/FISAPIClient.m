@@ -2,9 +2,6 @@
 //  FISAPIClient.m
 //  locationTrivia-API
 //
-//  Created by Mykel Pereira on 4/14/15.
-//  Copyright (c) 2015 Joe Burgess. All rights reserved.
-//
 
 #import "FISAPIClient.h"
 #import <AFNetworking/AFHTTPRequestOperationManager.h>

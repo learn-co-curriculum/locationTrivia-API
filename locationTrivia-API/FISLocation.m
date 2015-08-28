@@ -38,7 +38,7 @@
     }
 
     return self;
-    
+
 }
 
 -(id)initWithName:(NSString *)name Latitude:(NSNumber *)latitude Longitude:(NSNumber *)longitude
