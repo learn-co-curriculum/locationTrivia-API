@@ -11,7 +11,7 @@
 @implementation FISTrivia
 + (FISTrivia *)triviumFromDictionary:(NSDictionary *)triviumDictionary
 {
-    return [[FISTrivia alloc] initWithContent:triviumDictionary[@"content"] Likes:0 triviaID:triviumDictionary[@"id"] locationID:triviumDictionary[@"location_id"]];
+    return [[FISTrivia alloc] initWithContent:triviumDictionary[@"content"] Likes:0 triviaID:triviumDictionary[@"id"] locationID:triviumDictionary[@"location"][@"id"]];
 }
 
 - (instancetype)initWithContent:(NSString *)content Likes:(NSInteger)likes triviaID:(NSString *)triviaID locationID:(NSString *)locationID
