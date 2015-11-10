@@ -58,11 +58,18 @@
 
 + (OHHTTPStubsResponse *)stubResponseWithType:(StubResponseType)type {
     
+    NSString *filePathOfFakeJSON = [[NSBundle mainBundle] pathForResource:@"FakeArrayJSON" ofType:@"json"];
+    
+    NSString *filePathOfFakeTriviaJSON = [[NSBundle mainBundle] pathForResource:@"FakeTriviaJSON" ofType:@"json"];
+    
+    NSString *fakeArrayJSON = [[NSBundle mainBundle] pathForResource:@"FakeFinalArrayJSON" ofType:@"json"];
+    
     switch (type) {
             
         case Array: {
             
-            return [OHHTTPStubsResponse responseWithJSONObject:[FISTestHelper createFakeArrayJSON]
+            
+            return [OHHTTPStubsResponse responseWithFileAtPath:fakeArrayJSON
                                                     statusCode:200
                                                        headers:@{ @"Content-type": @"application/json"}];
             break;
@@ -70,7 +77,7 @@
             
         case Dictionary: {
             
-            return [OHHTTPStubsResponse responseWithJSONObject:[FISTestHelper createFakeDictJSON]
+            return [OHHTTPStubsResponse responseWithFileAtPath:filePathOfFakeJSON
                                                     statusCode:200
                                                        headers:@{ @"Content-type": @"application/json"}];
             break;
@@ -78,7 +85,7 @@
             
         case TriviaDictionary: {
             
-            return [OHHTTPStubsResponse responseWithJSONObject:[FISTestHelper createFakeTrivia]
+            return [OHHTTPStubsResponse responseWithFileAtPath:filePathOfFakeTriviaJSON
                                                     statusCode:200
                                                        headers:@{ @"Content-type": @"application/json"}];
             break;

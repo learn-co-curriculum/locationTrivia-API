@@ -27,10 +27,16 @@
 #pragma mark - Imports
 
 #import <Foundation/Foundation.h>
+
 #import "Compatibility.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 #pragma mark - Defines & Constants
+
+// Non-standard download speeds
+extern const double
+OHHTTPStubsDownloadSpeed1KBPS,					// 1.0 KB per second
+OHHTTPStubsDownloadSpeedSLOW;					// 1.5 KB per second
 
 // Standard download speeds.
 extern const double
@@ -133,6 +139,22 @@ NS_ASSUME_NONNULL_BEGIN
                            statusCode:(int)statusCode
                               headers:(nullable NSDictionary*)httpHeaders;
 
+
+/**
+ *  Builds a response given a URL, the status code, and headers.
+ *
+ *  @param fileURL     The URL for the data to return in the response
+ *  @param statusCode  The HTTP Status Code to use in the response
+ *  @param httpHeaders The HTTP Headers to return in the response
+ *
+ *  @return An `OHHTTPStubsResponse` describing the corresponding response to return by the stub
+ *
+ *  @note This method applies only to URLs that represent file system resources
+ */
++(instancetype)responseWithFileURL:(NSURL *)fileURL
+                        statusCode:(int)statusCode
+                           headers:(nullable NSDictionary *)httpHeaders;
+
 /* -------------------------------------------------------------------------- */
 #pragma mark > Building an error response
 
@@ -190,6 +212,13 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Initializers
 /*! @name Initializers */
 
+/**
+ * Designated empty initializer
+ *
+ * @return An empty `OHHTTPStubsResponse` on which you need to set either an error or a statusCode, httpHeaders, inputStream and dataSize.
+ *
+ * @note This is not recommended to use this method directly. You should use `initWithInputStream:dataSize:statusCode:headers:` instead.
+ */
 -(instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /**
@@ -226,6 +255,21 @@ NS_ASSUME_NONNULL_BEGIN
                        statusCode:(int)statusCode
                           headers:(nullable NSDictionary*)httpHeaders;
 
+
+/**
+ *  Initialize a response with a given URL, statusCode and headers.
+ *
+ *  @param fileURL     The URL for the data to return in the response
+ *  @param statusCode  The HTTP Status Code to use in the response
+ *  @param httpHeaders The HTTP Headers to return in the response
+ *
+ *  @return An `OHHTTPStubsResponse` describing the corresponding response to return by the stub
+ *
+ *  @note This method applies only to URLs that represent file system resources
+ */
+-(instancetype)initWithFileURL:(NSURL *)fileURL
+                    statusCode:(int)statusCode
+                       headers:(nullable NSDictionary *)httpHeaders;
 
 /**
  *  Initialize a response with the given data, statusCode and headers.
