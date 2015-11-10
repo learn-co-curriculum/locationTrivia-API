@@ -12,6 +12,7 @@
 		5B83D7331B615D900003CCAC /* locationTriviaViewsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B83D7321B615D900003CCAC /* locationTriviaViewsSpec.m */; };
 		5B83D7391B668C100003CCAC /* FISAPIClientSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B83D7381B668C100003CCAC /* FISAPIClientSpec.m */; };
 		5B83D73C1B7A41060003CCAC /* FISTestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B83D73B1B7A41060003CCAC /* FISTestHelper.m */; };
+		5BC3079F1BE91BDA0069EF81 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BC3079E1BE91BDA0069EF81 /* Launch Screen.storyboard */; settings = {ASSET_TAGS = (); }; };
 		D80594AD1976F1B300116B35 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80594AC1976F1B300116B35 /* Foundation.framework */; };
 		D80594AF1976F1B300116B35 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80594AE1976F1B300116B35 /* CoreGraphics.framework */; };
 		D80594B11976F1B300116B35 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80594B01976F1B300116B35 /* UIKit.framework */; };
@@ -53,6 +54,7 @@
 		5B83D7381B668C100003CCAC /* FISAPIClientSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FISAPIClientSpec.m; sourceTree = "<group>"; };
 		5B83D73A1B7A41060003CCAC /* FISTestHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FISTestHelper.h; sourceTree = "<group>"; };
 		5B83D73B1B7A41060003CCAC /* FISTestHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FISTestHelper.m; sourceTree = "<group>"; };
+		5BC3079E1BE91BDA0069EF81 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		9B1270F4E41987DF02F9FE00 /* libPods-locationTrivia-API.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-locationTrivia-API.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EA63685DE4E8E9ACEAD2B8E /* Pods-locationTrivia-APITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locationTrivia-APITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-locationTrivia-APITests/Pods-locationTrivia-APITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B7080BB79891B7BA6DC9A172 /* Pods-locationTrivia-APITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locationTrivia-APITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-locationTrivia-APITests/Pods-locationTrivia-APITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				D80594F11976F1D000116B35 /* FISTrivia.m */,
 				D80594C41976F1B300116B35 /* Images.xcassets */,
 				D80594B31976F1B300116B35 /* Supporting Files */,
+				5BC3079E1BE91BDA0069EF81 /* Launch Screen.storyboard */,
 			);
 			path = "locationTrivia-API";
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 			files = (
 				D80594F21976F1D000116B35 /* Main.storyboard in Resources */,
 				D80594C51976F1B300116B35 /* Images.xcassets in Resources */,
+				5BC3079F1BE91BDA0069EF81 /* Launch Screen.storyboard in Resources */,
 				D80594B71976F1B300116B35 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -473,7 +477,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -505,7 +509,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -516,10 +520,10 @@
 			baseConfigurationReference = ED0A0AC05975BC9F212A737F /* Pods-locationTrivia-API.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "locationTrivia-API/locationTrivia-API-Prefix.pch";
 				INFOPLIST_FILE = "locationTrivia-API/locationTrivia-API-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -530,10 +534,10 @@
 			baseConfigurationReference = DF2E14CAD622CF75C13FBFF1 /* Pods-locationTrivia-API.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "locationTrivia-API/locationTrivia-API-Prefix.pch";
 				INFOPLIST_FILE = "locationTrivia-API/locationTrivia-API-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
