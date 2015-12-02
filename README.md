@@ -187,3 +187,5 @@ DELETE /locations/:location_id/trivia/:trivia_id.json
   4. Now Add the Update functionality
   5. Implement [swipe to deelte](http://stackoverflow.com/questions/3309484/uitableviewcell-show-delete-button-on-swipe) for each location.
 
+
+<a href='https://learn.co/lessons/locationTrivia-API' data-visibility='hidden'>View this lesson on Learn.co</a>
